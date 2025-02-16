@@ -158,8 +158,8 @@ def admet_performance(seed_options, sID, device, lr, batch_size, num_epochs,
             # Model configuration
             model = Model_2enc(lID = 1, task_type = task_type, NumToken = sID).to('cuda')
 
-            model.smiles_encoder.load_state_dict(torch.load("/vol/bertdata/2encoder/OdorCode-40 smiles_encoder D256.Hidden512.Head8.L10.R0.5.S100000-epoch.600"))
-            model.symbol_encoder.load_state_dict(torch.load("/vol/bertdata/2encoder/OdorCode-40 symbol_encoder D256.Hidden512.Head8.L10.R0.5.S100000-epoch.600"))
+            model.smiles_encoder.load_state_dict(torch.load("ckpts/OdorCode-40 smiles_encoder D256.Hidden512.Head8.L10.R0.5.S100000-epoch.600"))
+            model.symbol_encoder.load_state_dict(torch.load("ckpts/OdorCode-40 symbol_encoder D256.Hidden512.Head8.L10.R0.5.S100000-epoch.600"))
 
             for param in model.symbol_encoder.parameters():
                 param.requires_grad = False

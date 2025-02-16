@@ -159,7 +159,7 @@ def admet_performance(seed_options, tokenizer, d_model, n_layers, heads, dropout
             vocab_size = len(tokenizer.vocab)
             bert_model = BERT(vocab_size=vocab_size, d_model=d_model, n_layers=n_layers, heads=heads, 
                               dropout=dropout, seq_len=seq_len, device=device)
-            bert_model.load_state_dict(torch.load("/vol/bertdata/smiletobert_admet/ckpts/ckpt_descriptors.pt",
+            bert_model.load_state_dict(torch.load("ckpts/ckpt_smiletobert.pt",
                                                   weights_only=True))
             admet_prediction = AdmetSMILES(bert_model, hidden_layer, task_type=task_type, output=1, dropout=dropout)
     

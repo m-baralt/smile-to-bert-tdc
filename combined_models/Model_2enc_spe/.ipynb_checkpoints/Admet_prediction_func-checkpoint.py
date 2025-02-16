@@ -185,7 +185,7 @@ def admet_performance(seed_options, tokenizer, spe, symbol_ID, seq_len, d_model,
             bert_model = BERT(vocab_size = vocab_size, d_model=d_model, n_layers=n_layers, heads=heads, 
                               dropout=dropout, seq_len = seq_len, device = device)
             
-            bert_model.load_state_dict(torch.load("/vol/bertdata/smiletobert_admet/ckpts/ckpt_descriptors.pt",
+            bert_model.load_state_dict(torch.load("ckpts/ckpt_smiletobert.pt",
                                                   weights_only=True))
             
             for name, param in bert_model.named_parameters():
@@ -197,8 +197,8 @@ def admet_performance(seed_options, tokenizer, spe, symbol_ID, seq_len, d_model,
             # 2-encoder configuration
             model = Model_2enc(lID = lID, task_type = task_type, NumToken = sID).to('cuda')
 
-            model.smiles_encoder.load_state_dict(torch.load("/vol/bertdata/2encoder/OdorCode-40 smiles_encoder D256.Hidden512.Head8.L10.R0.5.S100000-epoch.600"))
-            model.symbol_encoder.load_state_dict(torch.load("/vol/bertdata/2encoder/OdorCode-40 symbol_encoder D256.Hidden512.Head8.L10.R0.5.S100000-epoch.600"))
+            model.smiles_encoder.load_state_dict(torch.load("ckpts/OdorCode-40 smiles_encoder D256.Hidden512.Head8.L10.R0.5.S100000-epoch.600"))
+            model.symbol_encoder.load_state_dict(torch.load("ckpts/OdorCode-40 symbol_encoder D256.Hidden512.Head8.L10.R0.5.S100000-epoch.600"))
 
             for param in model.symbol_encoder.parameters():
                 param.requires_grad = False

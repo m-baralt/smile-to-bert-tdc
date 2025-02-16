@@ -45,7 +45,7 @@ def train_model(model, train_loader, valid_loader, criterion, optimizer,
     for epoch in range(num_epochs):
         model.train()  # Set the model to training mode
         train_loss = 0.0
-        print(f"Epoch {epoch+1}\n-------------------------------")
+        print(f"Epoch {epoch+1} \n-------------------------------")
 
         # Training loop
         for batch, (X, Y) in tqdm.tqdm(enumerate(train_loader)):
@@ -153,7 +153,7 @@ def admet_performance(seed_options, d_model, n_layers, heads, dropout, device,
             test_dataloader = DataLoader(dataset=test_dataset, shuffle=False, batch_size=1, num_workers=10)
 
             # Model configuration
-            checkpoint = torch.load("/vol/bertdata/smiletobert_admet/ckpts/transformer_ckpt.ckpt")
+            checkpoint = torch.load("ckpts/transformer_ckpt.ckpt")
             
             transformer = TransformerBert(alphabet_size = ALPHABET_SIZE, d_model = d_model, 
                                           hidden = hidden_layer, N = n_layers, task_type = task_type,

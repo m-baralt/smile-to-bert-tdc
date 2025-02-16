@@ -24,6 +24,8 @@ n_layers = 6
 heads = 8
 dropout = 0.1
 
+if not os.path.exists('admet/'):
+    os.makedirs('admet/')
 group = admet_group(path = '/vol/bertdata/admet/')
 
 batch_size = 64
@@ -54,12 +56,13 @@ benchmark_config = {
     'dili': 'classification'
 }
 
-
+if not os.path.exists('results/'):
+    os.makedirs('results/')
 results_onelayer_256_transformer = admet_performance(seed_options = [1, 2, 3, 4, 5], d_model = d_model, 
                                              n_layers = n_layers, heads = heads, dropout = dropout, 
                                              device = device, lr = 0.0001, batch_size = batch_size, 
                                              num_epochs = epoch, group = group, group_config = benchmark_config,
-                                             model_dir = "/vol/bertdata/smiletobert_admet/best_models/", 
+                                             model_dir = "best_models/", 
                                              hidden_layer = 256, 
                                              blocks_freeze = ['module.encoder.layers.5.', 
                                                               'module.encoder.norm.alpha', 
@@ -68,7 +71,7 @@ results_onelayer_256_transformer = admet_performance(seed_options = [1, 2, 3, 4,
 print("Results Transformer - one layer - hidden 256:")
 print(results_onelayer_256_transformer)
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/transformer_onelayer_256.json", "w") as json_file:
+with open("results/transformer_onelayer_256.json", "w") as json_file:
     json.dump(results_onelayer_256_transformer, json_file, indent=4)
     
 
@@ -76,7 +79,7 @@ results_twolayer_256_transformer = admet_performance(seed_options = [1, 2, 3, 4,
                                              n_layers = n_layers, heads = heads, dropout = dropout, 
                                              device = device, lr = 0.0001, batch_size = batch_size, 
                                              num_epochs = epoch, group = group, group_config = benchmark_config,
-                                             model_dir = "/vol/bertdata/smiletobert_admet/best_models/", 
+                                             model_dir = "best_models/", 
                                              hidden_layer = 256, 
                                              blocks_freeze = ['module.encoder.layers.5.',
                                                               'module.encoder.layers.4.'
@@ -86,7 +89,7 @@ results_twolayer_256_transformer = admet_performance(seed_options = [1, 2, 3, 4,
 print("Results Transformer - two layer - hidden 256:")
 print(results_twolayer_256_transformer)
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/transformer_twolayer_256.json", "w") as json_file:
+with open("results/transformer_twolayer_256.json", "w") as json_file:
     json.dump(results_twolayer_256_transformer, json_file, indent=4)
 
 
@@ -94,7 +97,7 @@ results_onelayer_512_transformer = admet_performance(seed_options = [1, 2, 3, 4,
                                              n_layers = n_layers, heads = heads, dropout = dropout, 
                                              device = device, lr = 0.0001, batch_size = batch_size, 
                                              num_epochs = epoch, group = group, group_config = benchmark_config,
-                                             model_dir = "/vol/bertdata/smiletobert_admet/best_models/", 
+                                             model_dir = "best_models/", 
                                              hidden_layer = 512, 
                                              blocks_freeze = ['module.encoder.layers.5.', 
                                                               'module.encoder.norm.alpha', 
@@ -103,7 +106,7 @@ results_onelayer_512_transformer = admet_performance(seed_options = [1, 2, 3, 4,
 print("Results Transformer - one layer - hidden 512:")
 print(results_onelayer_512_transformer)
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/transformer_onelayer_512.json", "w") as json_file:
+with open("results/transformer_onelayer_512.json", "w") as json_file:
     json.dump(results_onelayer_512_transformer, json_file, indent=4)
     
 
@@ -111,7 +114,7 @@ results_twolayer_512_transformer = admet_performance(seed_options = [1, 2, 3, 4,
                                              n_layers = n_layers, heads = heads, dropout = dropout, 
                                              device = device, lr = 0.0001, batch_size = batch_size, 
                                              num_epochs = epoch, group = group, group_config = benchmark_config,
-                                             model_dir = "/vol/bertdata/smiletobert_admet/best_models/", 
+                                             model_dir = "best_models/", 
                                              hidden_layer = 512, 
                                              blocks_freeze = ['module.encoder.layers.5.',
                                                               'module.encoder.layers.4.'
@@ -121,7 +124,7 @@ results_twolayer_512_transformer = admet_performance(seed_options = [1, 2, 3, 4,
 print("Results Transformer - two layer - hidden 512:")
 print(results_twolayer_512_transformer)
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/transformer_twolayer_512.json", "w") as json_file:
+with open("results/transformer_twolayer_512.json", "w") as json_file:
     json.dump(results_twolayer_512_transformer, json_file, indent=4)
 
 

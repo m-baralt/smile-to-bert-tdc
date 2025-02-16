@@ -178,7 +178,7 @@ def admet_performance(seed_options, tokenizer, spe, seq_len, d_model, n_layers, 
             bert_model = BERT(vocab_size = vocab_size, d_model=d_model, n_layers=n_layers, heads=heads, 
                               dropout=dropout, seq_len = seq_len, device = device)
             
-            bert_model.load_state_dict(torch.load("/vol/bertdata/smiletobert_admet/ckpts/ckpt_descriptors.pt",
+            bert_model.load_state_dict(torch.load("ckpts/ckpt_smiletobert.pt",
                                                   weights_only=True))
             
             for name, param in bert_model.named_parameters():
@@ -188,7 +188,7 @@ def admet_performance(seed_options, tokenizer, spe, seq_len, d_model, n_layers, 
             bert_model.to(device)
 
             # Transformer configuration
-            checkpoint = torch.load("/vol/bertdata/smiletobert_admet/ckpts/transformer_ckpt.ckpt")
+            checkpoint = torch.load("ckpts/transformer_ckpt.ckpt")
 
             transformer = Encoder(alphabet_size=ALPHABET_SIZE, d_model = 512, N = 6, 
                                   heads = 8, dropout = dropout)

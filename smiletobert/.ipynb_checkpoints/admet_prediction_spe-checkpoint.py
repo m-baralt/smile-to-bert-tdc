@@ -27,7 +27,9 @@ n_layers = 4
 heads = 8
 dropout = 0.1
 
-group = admet_group(path = '/vol/bertdata/admet/')
+if not os.path.exists('admet/'):
+    os.makedirs('admet/')
+group = admet_group(path = 'admet/')
 
 batch_size = 64
 epoch = 50
@@ -57,6 +59,8 @@ benchmark_config = {
     'dili': 'classification'
 }
 
+if not os.path.exists('results/'):
+    os.makedirs('results/')
 
 results_onelayer_256_spe = admet_performance(seed_options = [1, 2, 3, 4, 5], tokenizer = spe_tokenizer, 
                                            d_model = d_model, n_layers = n_layers, 
@@ -64,7 +68,7 @@ results_onelayer_256_spe = admet_performance(seed_options = [1, 2, 3, 4, 5], tok
                                            device = device, lr = 0.0001, 
                                            batch_size = batch_size, num_epochs = epoch, 
                                            group = group, group_config = benchmark_config, 
-                                           model_dir = "/vol/bertdata/smiletobert_admet/best_models/", 
+                                           model_dir = "best_models/", 
                                            hidden_layer = 256, 
                                            blocks_freeze = ['bert.encoder_blocks.3'], spe = spe)
 
@@ -72,7 +76,7 @@ print("Results Smile-to-Bert - one layer - hidden 256:")
 print(results_onelayer_256_spe)
 
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/smiletobert_onelayer_256.json", "w") as json_file:
+with open("results/smiletobert_onelayer_256.json", "w") as json_file:
     json.dump(results_onelayer_256_spe, json_file, indent=4)
 
 
@@ -82,14 +86,14 @@ results_twolayers_256_spe = admet_performance(seed_options = [1, 2, 3, 4, 5], to
                                               device = device, lr = 0.0001, 
                                               batch_size = batch_size, num_epochs = epoch, 
                                               group = group, group_config = benchmark_config, 
-                                              model_dir = "/vol/bertdata/smiletobert_admet/best_models/", hidden_layer = 256,
+                                              model_dir = "best_models/", hidden_layer = 256,
                                               blocks_freeze = ['bert.encoder_blocks.2', 'bert.encoder_blocks.3'], spe = spe)
 
 
 print("Results Smile-to-Bert - two layers - hidden 256:")
 print(results_twolayers_256_spe)
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/smiletobert_twolayers_256.json", "w") as json_file:
+with open("results/smiletobert_twolayers_256.json", "w") as json_file:
     json.dump(results_twolayers_256_spe, json_file, indent=4)
 
 results_onelayer_512_spe = admet_performance(seed_options = [1, 2, 3, 4, 5], tokenizer = spe_tokenizer, 
@@ -98,7 +102,7 @@ results_onelayer_512_spe = admet_performance(seed_options = [1, 2, 3, 4, 5], tok
                                              device = device, lr = 0.0001, 
                                              batch_size = batch_size, num_epochs = epoch, 
                                              group = group, group_config = benchmark_config, 
-                                             model_dir = "/vol/bertdata/smiletobert_admet/best_models/", 
+                                             model_dir = "best_models/", 
                                              hidden_layer = 512, 
                                              blocks_freeze = ['bert.encoder_blocks.3'], spe = spe)
 
@@ -106,7 +110,7 @@ print("Results Smile-to-Bert - one layer - hidden 512:")
 print(results_onelayer_512_spe)
 
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/smiletobert_onelayer_512.json", "w") as json_file:
+with open("results/smiletobert_onelayer_512.json", "w") as json_file:
     json.dump(results_onelayer_512_spe, json_file, indent=4)
 
 
@@ -116,14 +120,14 @@ results_twolayers_512_spe = admet_performance(seed_options = [1, 2, 3, 4, 5], to
                                               device = device, lr = 0.0001, 
                                               batch_size = batch_size, num_epochs = epoch, 
                                               group = group, group_config = benchmark_config, 
-                                              model_dir = "/vol/bertdata/smiletobert_admet/best_models/", hidden_layer = 512,
+                                              model_dir = "best_models/", hidden_layer = 512,
                                               blocks_freeze = ['bert.encoder_blocks.2', 'bert.encoder_blocks.3'], spe = spe)
 
 
 print("Results Smile-to-Bert - two layers - hidden 512:")
 print(results_twolayers_512_spe)
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/smiletobert_twolayers_512.json", "w") as json_file:
+with open("results/smiletobert_twolayers_512.json", "w") as json_file:
     json.dump(results_twolayers_512_spe, json_file, indent=4)
 
 

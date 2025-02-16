@@ -20,7 +20,10 @@ from model2encoder.Model.Admet_prediction_func import admet_performance
 
 device = 'cuda'
 
-group = admet_group(path = '/vol/bertdata/admet/')
+if not os.path.exists('admet/'):
+    os.makedirs('admet/')
+    
+group = admet_group(path = 'admet/')
 
 batch_size = 64
 epoch = 50
@@ -61,31 +64,33 @@ benchmark_config = {
     'dili': 'classification'
 }
 
+if not os.path.exists('results/'):
+    os.makedirs('results/')
 
 results_onelayer_2encoder = admet_performance(seed_options = [1, 2, 3, 4, 5], sID = sID,
                                               device = device, lr = 0.0001, batch_size = batch_size, 
                                               num_epochs = epoch, group = group, 
                                               group_config = benchmark_config,
-                                              model_dir = "/vol/bertdata/smiletobert_admet/best_models/",
+                                              model_dir = "best_models/",
                                               twolayers = False, seq_len = 100, symbol_ID = symbol_ID)
 
 print("Results 2-encoder - one layer:")
 print(results_onelayer_2encoder)
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/onelayer_2encoder.json", "w") as json_file:
+with open("results/onelayer_2encoder.json", "w") as json_file:
     json.dump(results_onelayer_2encoder, json_file, indent=4)
 
 results_twolayer_2encoder = admet_performance(seed_options = [1, 2, 3, 4, 5], sID = sID,
                                               device = device, lr = 0.0001, batch_size = batch_size, 
                                               num_epochs = epoch, group = group, 
                                               group_config = benchmark_config,
-                                              model_dir = "/vol/bertdata/smiletobert_admet/best_models/",
+                                              model_dir = "best_models/",
                                               twolayers = True, seq_len = 100, symbol_ID = symbol_ID)
 
 print("Results 2-encoder - two layer:")
 print(results_twolayer_2encoder)
 
-with open("/home/ubuntu/Bertsmiles_git/TDC_ADMET/results_paper/twolayer_2encoder.json", "w") as json_file:
+with open("results/twolayer_2encoder.json", "w") as json_file:
     json.dump(results_twolayer_2encoder, json_file, indent=4)
     
 
